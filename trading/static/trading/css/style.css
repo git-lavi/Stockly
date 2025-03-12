@@ -1,0 +1,149 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;700&family=Poppins:wght@600&display=swap');
+
+/* style.css */
+:root {
+    --primary-color: #2854C5;
+    --secondary-color: #6c757d;
+    --accent-teal: #17a2b8;
+    --accent-green: #28a745;
+    --accent-red: #dc3545;
+}
+
+body {
+    font-family: 'Open Sans', sans-serif;
+    color: rgb(79, 79, 79);
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'Poppins', sans-serif;
+    color: #646464;
+}
+
+.table-striped th {
+  color: #717171;
+}
+
+.table-striped td {
+  color: rgb(79, 79, 79);
+}
+
+.alert-warning {
+  background-color: #ffeeba;
+  border-color: #ffeeba;
+}
+
+.navbar-brand {
+  font-size: 1.4rem;
+}
+
+.overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 20;
+}
+
+.overlay-content {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 5px;
+    z-index: 22;
+}
+
+.container {
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    padding: 30px;}
+
+.btn-primary {
+    background-color: var(--accent-teal);
+    border-color: var(--accent-teal);
+    border-radius: 5px;
+    box-shadow: 0 2px 3px rgba(0, 0, 0, 0.1);
+}
+
+.btn-primary:hover {
+  background-color: teal;
+}
+
+.btn-primary:disabled {
+  background-color: rgba(7, 156, 156, 0.616);
+}
+
+.btn-success {
+    background-color: var(--accent-green);
+    border-color: var(--accent-green);
+}
+
+.btn-success:hover {
+  background-color: green;
+}
+
+.btn-danger {
+    background-color: var(--accent-red);
+    border-color: var(--accent-red);
+}
+
+.btn-danger:hover {
+  background-color: red;
+}
+
+.table {
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.table-striped tbody tr:nth-of-type(odd) {
+    background-color: rgba(0, 0, 0, 0.05);
+}
+
+.form-control {
+    margin-bottom: 15px;
+}
+
+.container {
+  background: linear-gradient(to bottom right, #f8f9fa, #e9ecef);
+}
+
+.table-striped tbody tr:nth-of-type(odd) {
+  background-color: rgba(114, 166, 231, 0.1);
+}
+
+#search-input:hover {
+  background-color: #fafafa;
+}
+
+#searchStock:hover {
+  background-color: #fafafa;
+}
+
+#search-button:hover {
+  background-color: #e9e9e9;
+}
+
+#searchButton:hover {
+  background-color: #e9e9e9;
+}
+
+@media (max-width: 768px) {
+.container {
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+.table-responsive {
+    margin-top: 10px;
+}
+
+.alert-dismissable {
+  max-width: 90% !important;
+}
+}

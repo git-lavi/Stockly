@@ -1,0 +1,84 @@
+{% extends "trading/layout.html" %}
+{% load static %}
+
+{% block title %}Sell Stock - Trading{% endblock title %}
+
+{% block content %}
+    <div class="container mt-2">
+        <div id="alert" class="alert alert-dismissable w-100 text-center" style="position: fixed; top: 7%; left: 50%; transform: translateX(-50%); max-width: 65%;"></div>
+        <h2 class="text-center">Sell Stocks</h2>
+        
+        <!-- Search Section -->
+            <div class="row mb-3 justify-content-center">
+                <div class="col-md-8">
+                    <input type="text" class="form-control" name="search" id="searchStock" autofocus placeholder="Search for a symbol..." aria-label="Search for a symbol...">
+                </div>
+                <div class="col-md-2">
+                    <button class="btn" type="button" id="searchButton">
+                        <span style="color: #2854C5;" class="material-icons">search</span>
+                    </button>
+                </div>
+            </div>
+        <div id="searchResults" class="search-results mt-2"></div>
+
+        <!-- Stocks table -->
+        <div class="container mt-4 col-md-12">
+            <table class="table mt-4 table-striped table-hover table-sm">
+                <thead>
+                    <tr>
+                        <th>Stock Symbol</th>
+                        <th>Quantity</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for stock in stocks_data %}
+                    <tr class="stock-row" data-symbol="{{ stock.symbol }}" data-quantity="{{ stock.quantity }}">
+                        <td>{{ stock.symbol }}</td>
+                        <td>{{ stock.quantity }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- Overlay for Sell menu -->
+    <div id="sellOverlay" class="overlay" style="display: none;">
+        <div class="overlay-content modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="overlayStockSymbol">...</h5>
+                </div>
+                <div class="modal-body">
+                    <p>Price: <span id="overlayStockPrice">loading...</span></p>
+                    <p>Owned: <span id="overlayStockOwned">loading...</span></p>
+                    <label for="quantity" class="form-label">Quantity:</label>  
+                    <input type="number" class="form-control form-control-lg" id="quantity" name="quantity" min="1" value="1">
+                </div>
+                <div class="modal-footer mt-4">
+                    <button type="button" class="btn btn-secondary ms-2" id="closeButton">Close</button>
+                    <button type="button" class="btn btn-primary ms-2" id="sellButton">Sell</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Pagination -->
+    <nav aria-label="Page navigation" style="margin-top: 1%;">
+        <ul class="pagination justify-content-center">
+            <li class="page-item">
+                <a class="page-link previous {% if previous_page_exists %}{% else %}disabled{% endif %}" href="{% url "sell" %}?page={{ previous_page_number }}">Previous</a>
+            </li>
+            <li>
+                <a class="page-link disabled current" href="">Current</a>
+            </li>
+            <li class="page-item">
+                <a class="page-link next {% if next_page_exists %}{% else %}disabled{% endif %}" href="{% url "sell" %}?page={{ next_page_number }}">Next</a>
+            </li>
+        </ul>
+    </nav>
+{% endblock content %}
+
+{% block extra_js %}
+<script src="{% static 'trading/js/sell.js' %}"></script>
+{% endblock %}

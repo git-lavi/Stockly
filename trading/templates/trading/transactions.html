@@ -1,0 +1,62 @@
+{% extends "trading/layout.html" %}
+
+{% block title %}Transactions - Trading{% endblock title %}
+
+{% block content %}
+    <div class="container">
+        <h2 class="mt-5">Your Transactions</h2>
+        <div class="table-responsive">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th scope="col">Symbol</th>
+                        <th scope="col">Transaction Type</th>
+                        <th scope="col">Quantity</th>
+                        <th scope="col">Price</th>
+                        <th scope="col">Total</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for transaction in transactions_data %}
+                        <tr>
+                            <td class="stock-symbol" id="stock-symbol-{{transaction.id}}">
+                                {{ transaction.stock_symbol }}
+                            </td>
+
+                            <td id="transaction-type-{{transaction.id}}">
+                                {{ transaction.transaction_type }}
+                            </td>
+
+                            <td id="quantity-{{transaction.id}}">
+                                {{ transaction.quantity }}
+                            </td>
+
+                            <td id="price-{{transaction.id}}">
+                                {{ transaction.price }}
+                            </td>
+
+                            <td id="total-{{transaction.id}}">
+                                {{ transaction.total }}
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Pagination -->
+        <nav aria-label="Page navigation" style="margin-top: 1%;">
+            <ul class="pagination justify-content-center">
+                <li class="page-item">
+                    <a class="page-link previous {% if previous_page_exists %}{% else %}disabled{% endif %}" href="{% url "transactions" %}?page={{ previous_page_number }}">Previous</a>
+                </li>
+                <li>
+                    <a class="page-link disabled current" href="">Current</a>
+                </li>
+                <li class="page-item">
+                    <a class="page-link next {% if next_page_exists %}{% else %}disabled{% endif %}" href="{% url "transactions" %}?page={{ next_page_number }}">Next</a>
+                </li>
+            </ul>
+        </nav>
+    </div>
+{% endblock content %}

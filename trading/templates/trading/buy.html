@@ -1,0 +1,90 @@
+{% extends "trading/layout.html" %}
+{% load static %}
+
+{% block title %}Buy Stock - Trading{% endblock title %}
+
+{% block content %}
+<div class="container">
+    <div id="stockPriceAlert" class="alert alert-dismissable w-100 text-center" style="position: fixed; top: 7%; left: 50%; transform: translateX(-50%); max-width: 65%;"></div>
+
+    <div class="row justify-content-center">
+        <div class="col-md-10">
+            <h2 class="mt-2 text-center">Buy Stock</h2>
+            
+            <!-- Search section -->
+                <div class="row mb-3 justify-content-center">
+                    <div class="col-md-8">
+                        <input type="text" class="form-control" name="search" id="search-input" autofocus placeholder="Search for a symbol..." aria-label="Search for a symbol...">
+                    </div>
+                    <div class="col-md-2">
+                        <button class="btn" type="button" id="search-button">
+                            <span style="color: #2854C5;" class="material-icons">search</span>
+                        </button>
+                    </div>
+                </div>
+
+            <!-- Stocks table -->
+            <div class="container mt-3">
+                <div class="rounded shadow-sm p-3 bg-white">
+                    <table class="table table-striped table-hover table-bordered table-sm" id="stocks-table">
+                        <thead class="thead-light">
+                            <tr>
+                                <th class="text-center">Symbol</th>
+                                <th>Company Name</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for stock in stocks %}
+                            <tr class="stock-row" data-symbol="{{ stock.symbol }}">
+                                <td class="text-center">{{ stock.symbol }}</td>
+                                <td>{{ stock.name }}</td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Overlay for Buy menu -->
+            <div id="stockOverlay" class="overlay">
+                <div class="overlay-content modal-dialog modal-lg">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="overlayStockSymbol">...</h5>
+                        </div>
+                        <div class="modal-body">
+                            <p>Price: <span id="overlayStockPrice"></span></p>
+                            <label for="quantity" class="form-label">Quantity:</label>  <input type="number" class="form-control form-control-lg" id="quantity" name="quantity" min="1" value="1">
+                        </div>
+                        <div class="modal-footer mt-4">
+                            <button type="button" class="btn btn-secondary ms-2" id="closeButton">Close</button>
+                            <button type="button" class="btn btn-primary ms-2" id="buyButton">Buy</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Pagination -->
+            <nav aria-label="Page navigation" style="margin-top: 1%;">
+                <ul class="pagination justify-content-center">
+                    <li class="page-item">
+                        <a class="page-link previous {% if previous_page_exists %}{% else %}disabled{% endif %}" href="{% url "buy" %}?page={{ previous_page_number }}">Previous</a>
+                    </li>
+                    <li>
+                        <a class="page-link disabled current" href="">Current</a>
+                    </li>
+                    <li class="page-item">
+                        <a class="page-link next {% if next_page_exists %}{% else %}disabled{% endif %}" href="{% url "buy" %}?page={{ next_page_number }}">Next</a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+{% endblock content %}
+
+{% block extra_js %}
+<script src="{% static 'trading/js/buy.js' %}"></script>
+{% endblock %}
+
