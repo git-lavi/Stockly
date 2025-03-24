@@ -23,7 +23,7 @@ Ensure that you install the appropriate versions of Git and Docker Desktop for y
 1. Clone the repository:
 
     ```bash
-    git clone https://github.com/git-lavi/Stockly.git .
+    git clone https://github.com/git-lavi/Stockly.git stockly
     ```
     Navigate into the project directory:
     
